@@ -1,0 +1,86 @@
+name: Warranty Claims Agent
+
+on:
+  # 1. Webhook trigger: Hexagon (or trigger/fire_github.py) calls the GitHub API
+  #    POST /repos/{owner}/{repo}/dispatches
+  #    {"event_type": "work_order.closed", "client_payload": {"wo_id": "WO-1001", "event_id": "evt-..."}}
+  repository_dispatch:
+    types: [work_order.closed]
+
+  # 2. Manual trigger: "Run workflow" button on the Actions tab
+  workflow_dispatch:
+    inputs:
+      wo_id:
+        description: "Work order to process (WO-1001 ... WO-1008), or 'all'"
+        required: true
+        default: "WO-1001"
+
+  # 3. Every code change: run the tests
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  # one run at a time per work order, so the same work order is never claimed twice in parallel
+  group: warranty-${{ github.event.client_payload.wo_id || github.event.inputs.wo_id || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  tests:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: End-to-end test (8 work orders)
+        run: python run_test.py
+
+  run-agent:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read trigger
+        id: trig
+        env:
+          DISPATCH_WO: ${{ github.event.client_payload.wo_id }}
+          DISPATCH_EVENT: ${{ github.event.client_payload.event_id }}
+          MANUAL_WO: ${{ github.event.inputs.wo_id }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "repository_dispatch" ]; then
+            echo "wo_id=$DISPATCH_WO" >> "$GITHUB_OUTPUT"
+            echo "event_id=$DISPATCH_EVENT" >> "$GITHUB_OUTPUT"
+            echo "source=hexagon-webhook (repository_dispatch)" >> "$GITHUB_OUTPUT"
+          else
+            echo "wo_id=$MANUAL_WO" >> "$GITHUB_OUTPUT"
+            echo "event_id=manual-$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+            echo "source=manual (workflow_dispatch by $GITHUB_ACTOR)" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate work order id
+        env:
+          WO: ${{ steps.trig.outputs.wo_id }}
+        run: |
+          if ! [[ "$WO" =~ ^(WO-[0-9]{4}|all)$ ]]; then
+            echo "::error::Invalid work order id: '$WO'"; exit 1
+          fi
+      - name: Run Warranty Claims Agent
+        env:
+          WO: ${{ steps.trig.outputs.wo_id }}
+          EVENT_ID: ${{ steps.trig.outputs.event_id }}
+          SOURCE: ${{ steps.trig.outputs.source }}
+        run: python run_agent.py "$WO" --event-id "$EVENT_ID" --source "$SOURCE"
+      - name: Save run record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-run-${{ github.run_id }}
+          path: output/
