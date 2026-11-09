@@ -16,6 +16,7 @@ tracks it.
 | `agent/workflow.py` | SOP steps 1–10 wired together, with an audit trail |
 | `data/` | **Sample data, all fictional**: 8 work orders, 3 warranty policies, component catalog, scripted human replies, expected outcomes |
 | `run_test.py` | End-to-end test run |
+| `trigger/` | Webhook trigger: receiver (`webhook_server.py`) and Hexagon simulator (`fire_event.py`) |
 | `tests/test_agent.py` | Unit tests for rules and for the paths the main run doesn't reach |
 | `output/` | Created by the test run: report, data lake records, Teams messages |
 
@@ -30,7 +31,57 @@ python -m unittest discover -s tests
 ```
 
 Only the Python standard library is needed (3.10+). The latest run: **8/8 work orders
-passed, 9/9 unit tests passed.** Details are in `output/run_report.md`.
+passed, 16/16 unit tests passed.** Details are in `output/run_report.md`.
+
+## The trigger: Hexagon `work_order.closed` webhook
+
+In production, Hexagon calls a webhook URL when a work order closes, and that
+starts the agent. `trigger/` is a working local version of this.
+
+```
+Hexagon (work order closed)
+   │  POST /webhooks/hexagon   {"event": "work_order.closed", "event_id": "...", "wo_id": "WO-1001"}
+   │  header X-Hexagon-Signature: sha256=<HMAC of body with shared secret>
+   ▼
+trigger/webhook_server.py
+   1. Signature valid?          no  → 401, nothing runs
+   2. Event type accepted?      no  → 200 "ignored" (e.g. work_order.opened)
+   3. Work order exists?        no  → 404
+   4. Same event_id seen?       yes → 200 "duplicate" (webhooks get retried)
+   5. Run the agent (SOP steps 1–10)
+        └ work order already has a claim? → ALREADY_CLAIMED, no second claim
+   ▼
+JSON response: status, claim number, value, every step taken
+```
+
+Start the receiver in one terminal:
+
+```bash
+python trigger/webhook_server.py
+```
+
+Then act as Hexagon from a second terminal:
+
+```bash
+python trigger/fire_event.py --all
+```
+
+```bash
+python trigger/fire_event.py WO-1001 --event-id evt-demo
+```
+
+```bash
+python trigger/fire_event.py WO-1002 --bad-signature
+```
+
+The server prints each event and every step the agent took. The signing secret
+comes from `HEXAGON_WEBHOOK_SECRET` (default `local-test-secret`, for local use only).
+The port comes from `TRIGGER_PORT` (default 8787).
+
+In Runbook, this becomes the workflow's webhook trigger. Give Hexagon the Runbook
+webhook URL and secret, and keep the same four checks. If Hexagon can't send
+webhooks, use the SOP's fallback: poll every 30 minutes for closed work orders
+that have no `warranty_review_status`.
 
 ### What the 8 test work orders cover
 

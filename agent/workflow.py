@@ -62,7 +62,14 @@ def run_work_order(wo_id: str, ctx: Context) -> RunResult:
     started = time.perf_counter()
     r = RunResult(wo_id=wo_id)
 
-    # Step 1: fetch
+    # Step 1: fetch (and never claim the same work order twice)
+    existing = ctx.hexagon.existing_claim(wo_id)
+    if existing:
+        r.status, r.claim_number = "ALREADY_CLAIMED", existing
+        r.reason = f"Work order already has claim {existing}"
+        r.log("1 fetch", r.reason + ", no new claim created")
+        ctx.lake.write({k: v for k, v in r.__dict__.items()})
+        return r
     wo = ctx.hexagon.get_work_order(wo_id)
     r.log("1 fetch", f"Loaded {wo_id} ({wo['unit_id']}, {wo['odometer_mi']:,} mi, {len(wo['parts'])} part(s))")
 

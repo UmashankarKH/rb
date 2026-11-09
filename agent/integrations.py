@@ -22,6 +22,9 @@ class MockHexagon:
     def get_work_order(self, wo_id: str) -> dict:
         return json.loads(json.dumps(self._orders[wo_id]))  # copy, like an API response
 
+    def existing_claim(self, wo_id: str) -> str | None:
+        return self.write_backs.get(wo_id, {}).get("warranty_claim_number")
+
     def update_work_order(self, wo_id: str, fields: dict) -> None:
         self.write_backs.setdefault(wo_id, {}).update(fields)
 
