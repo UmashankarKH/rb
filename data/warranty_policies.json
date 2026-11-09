@@ -1,0 +1,53 @@
+{
+  "_note": "SAMPLE DATA. Providers, terms and rates are fictional placeholders. Replace with the fleet's real warranty agreements.",
+  "policies": [
+    {
+      "policy_id": "POL-APEX-ENGINE",
+      "provider": "Apex Engines",
+      "provider_type": "OEM",
+      "match": {"engine_make": "Apex"},
+      "covered_components": ["egr_cooler", "turbocharger", "water_pump", "dpf"],
+      "exclusions": [],
+      "max_months": 36,
+      "max_miles": 250000,
+      "measure_from": "in_service",
+      "labor_rate": 145.0,
+      "labor_hours_cap": null,
+      "required_fields": ["fault_code", "failed_part_serial", "failed_part_photo"],
+      "portal": "apex-warranty-portal",
+      "portal_mode": "api"
+    },
+    {
+      "policy_id": "POL-NST-BASE",
+      "provider": "Northstar Trucks",
+      "provider_type": "OEM",
+      "match": {"make": "Northstar"},
+      "covered_components": ["air_compressor", "alternator", "brake_chamber"],
+      "exclusions": ["brake_chamber"],
+      "max_months": 24,
+      "max_miles": null,
+      "measure_from": "in_service",
+      "labor_rate": 130.0,
+      "labor_hours_cap": null,
+      "required_fields": ["failed_part_photo"],
+      "portal": "northstar-dealer-portal",
+      "portal_mode": "browser"
+    },
+    {
+      "policy_id": "POL-VOLT-PARTS",
+      "provider": "Volt Supply Co",
+      "provider_type": "SUPPLIER",
+      "match": {"part_prefix": "VS-"},
+      "covered_components": ["alternator", "starter"],
+      "exclusions": [],
+      "max_months": 12,
+      "max_miles": 100000,
+      "measure_from": "part_install",
+      "labor_rate": 120.0,
+      "labor_hours_cap": 1.0,
+      "required_fields": ["failed_part_serial", "original_invoice"],
+      "portal": "volt-supply-portal",
+      "portal_mode": "browser"
+    }
+  ]
+}

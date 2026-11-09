@@ -1,0 +1,14 @@
+{
+  "_note": "Replies that the mock Teams channel plays back, standing in for technicians and the warranty admin during the test run.",
+  "technician_replies": {
+    "WO-1003": {
+      "fault_code": "SPN 110 FMI 16",
+      "failed_part_serial": "WP-55102",
+      "note": "Active code SPN 110 FMI 16. Leak at weep hole confirmed with UV dye. Old pump serial WP-55102."
+    }
+  },
+  "admin_decisions": {
+    "WO-1002": {"decision": "approve", "by": "warranty.admin", "comment": "Turbo failure documented, approve."},
+    "WO-1007": {"decision": "approve_capped", "by": "warranty.admin", "comment": "Seized bolts are not warrantable. Cap labor at standard."}
+  }
+}

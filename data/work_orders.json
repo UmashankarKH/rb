@@ -1,0 +1,95 @@
+{
+  "_note": "SAMPLE DATA. Fictional work orders that stand in for Hexagon. Each one exercises a different path through the agent.",
+  "work_orders": [
+    {
+      "wo_id": "WO-1001", "shop": "Omaha", "unit_id": "T-2231", "vin": "SAMPLEVIN0000001",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2024-09-15",
+      "repair_date": "2026-03-20", "odometer_mi": 168400, "labor_hours": 4.0,
+      "tech_id": "TECH-07",
+      "tech_notes": "drvr says losing coolant, no ext leak found. pressure tested cooling sys, found coolant in egr cooler, white smoke at start. codes SPN 3251 FMI 0 active. replaced egr cooler + gaskets. pressure test ok, road test ok",
+      "parts": [
+        {"part_number": "AE-EGR-4410", "description": "EGR cooler assy", "qty": 1, "unit_cost": 1840.00, "serial": "ECX-88213"},
+        {"part_number": "AE-GSK-0021", "description": "EGR gasket kit", "qty": 1, "unit_cost": 65.00, "serial": null}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1002", "shop": "Lincoln", "unit_id": "T-1874", "vin": "SAMPLEVIN0000002",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2024-06-02",
+      "repair_date": "2026-03-22", "odometer_mi": 201300, "labor_hours": 5.5,
+      "tech_id": "TECH-03",
+      "tech_notes": "low power complaint from driver, boost low. code SPN 641 FMI 7 active. found turbo shaft play excessive, oil in intake. replaced turbo, cleaned intake piping. test drive ok",
+      "parts": [
+        {"part_number": "AE-TRB-2200", "description": "Turbocharger assy", "qty": 1, "unit_cost": 5400.00, "serial": "TB-40192"}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1003", "shop": "Omaha", "unit_id": "T-2310", "vin": "SAMPLEVIN0000003",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2025-01-10",
+      "repair_date": "2026-03-24", "odometer_mi": 121800, "labor_hours": 3.0,
+      "tech_id": "TECH-11",
+      "tech_notes": "coolant leak front of eng, temp running high. replaced water pump",
+      "parts": [
+        {"part_number": "AE-WP-1105", "description": "Water pump", "qty": 1, "unit_cost": 620.00, "serial": null}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1004", "shop": "Des Moines", "unit_id": "T-1502", "vin": "SAMPLEVIN0000004",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2023-11-01",
+      "repair_date": "2026-03-25", "odometer_mi": 271900, "labor_hours": 3.5,
+      "tech_id": "TECH-05",
+      "tech_notes": "regen not completing, dpf diff pressure high. code SPN 3251 FMI 16. replaced dpf",
+      "parts": [
+        {"part_number": "AE-DPF-0900", "description": "DPF", "qty": 1, "unit_cost": 2900.00, "serial": "DP-11873"}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1005", "shop": "Omaha", "unit_id": "T-1290", "vin": "SAMPLEVIN0000005",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2023-05-01",
+      "repair_date": "2026-03-18", "odometer_mi": 181000, "labor_hours": 1.5,
+      "tech_id": "TECH-07",
+      "tech_notes": "battery light on, not charging. output 12.1v at idle. replaced alternator, output 14.2v ok",
+      "parts": [
+        {"part_number": "VS-ALT-160", "description": "Alternator 160A", "qty": 1, "unit_cost": 410.00, "serial": "VA-90311"}
+      ],
+      "original_part_install": {"date": "2025-09-10", "odometer_mi": 140200, "invoice": "INV-77310"},
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1006", "shop": "Lincoln", "unit_id": "T-2402", "vin": "SAMPLEVIN0000006",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2025-05-20",
+      "repair_date": "2026-03-26", "odometer_mi": 88200, "labor_hours": 1.0,
+      "tech_id": "TECH-03",
+      "tech_notes": "air leak at rr axle, brake chamber diaphragm leaking. replaced brake chamber",
+      "parts": [
+        {"part_number": "NS-BC-3030", "description": "Brake chamber 30/30", "qty": 1, "unit_cost": 145.00, "serial": null}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1007", "shop": "Des Moines", "unit_id": "T-2288", "vin": "SAMPLEVIN0000007",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2025-01-05",
+      "repair_date": "2026-03-27", "odometer_mi": 132500, "labor_hours": 6.0,
+      "tech_id": "TECH-05",
+      "tech_notes": "driver reports slow air build up. compressor not building air, discharge line hot, found failed reed valves. replaced air compressor. bracket bolts seized, extra time to remove",
+      "parts": [
+        {"part_number": "NS-AC-4500", "description": "Air compressor", "qty": 1, "unit_cost": 1250.00, "serial": "AC-30388"}
+      ],
+      "attachments": ["failed_part_photo"]
+    },
+    {
+      "wo_id": "WO-1008", "shop": "Omaha", "unit_id": "T-2455", "vin": "SAMPLEVIN0000008",
+      "make": "Northstar", "engine_make": "Apex", "in_service_date": "2025-08-01",
+      "repair_date": "2026-03-28", "odometer_mi": 61000, "labor_hours": 2.0,
+      "tech_id": "TECH-11",
+      "tech_notes": "cab heater blowing cold. replaced blend door actuator",
+      "parts": [
+        {"part_number": "NS-HVAC-311", "description": "Blend door actuator", "qty": 1, "unit_cost": 190.00, "serial": null}
+      ],
+      "attachments": []
+    }
+  ]
+}

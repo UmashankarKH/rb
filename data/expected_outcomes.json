@@ -1,0 +1,13 @@
+{
+  "_note": "Evaluation set. The test run checks each agent result against these expectations.",
+  "expected": {
+    "WO-1001": {"final_status": "CLAIM_APPROVED", "policy_id": "POL-APEX-ENGINE", "component": "egr_cooler", "needed_approval": false, "needed_tech_info": false, "claim_labor_hours": 4.0},
+    "WO-1002": {"final_status": "CLAIM_APPROVED", "policy_id": "POL-APEX-ENGINE", "component": "turbocharger", "needed_approval": true,  "needed_tech_info": false},
+    "WO-1003": {"final_status": "CLAIM_APPROVED", "policy_id": "POL-APEX-ENGINE", "component": "water_pump",   "needed_approval": false, "needed_tech_info": true},
+    "WO-1004": {"final_status": "NOT_COVERED",    "component": "dpf",            "reason_contains": "miles"},
+    "WO-1005": {"final_status": "READY_FOR_MANUAL_SUBMIT", "policy_id": "POL-VOLT-PARTS", "component": "alternator", "needed_approval": false, "claim_labor_hours": 1.0},
+    "WO-1006": {"final_status": "NOT_COVERED",    "component": "brake_chamber",  "reason_contains": "excluded"},
+    "WO-1007": {"final_status": "CLAIM_APPROVED", "policy_id": "POL-NST-BASE",   "component": "air_compressor", "needed_approval": true, "claim_labor_hours": 3.0},
+    "WO-1008": {"final_status": "NEEDS_REVIEW"}
+  }
+}

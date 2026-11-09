@@ -1,0 +1,13 @@
+{
+  "_note": "SAMPLE DATA. Failure codes and standard labor times are placeholders, not real OEM codes. Replace with the OEM code lists and labor-time guides.",
+  "components": [
+    {"component": "egr_cooler",     "name": "EGR cooler",          "failure_code": "EGR-CLR-LEAK", "std_labor_hours": 4.0, "part_prefixes": ["AE-EGR"], "keywords": ["egr cooler", "egr"]},
+    {"component": "turbocharger",   "name": "Turbocharger",        "failure_code": "TRB-FAIL",     "std_labor_hours": 5.0, "part_prefixes": ["AE-TRB"], "keywords": ["turbocharger", "turbo"]},
+    {"component": "water_pump",     "name": "Water pump",          "failure_code": "CLT-WP-LEAK",  "std_labor_hours": 3.0, "part_prefixes": ["AE-WP"],  "keywords": ["water pump"]},
+    {"component": "dpf",            "name": "Diesel particulate filter", "failure_code": "ATS-DPF-PLUG", "std_labor_hours": 3.5, "part_prefixes": ["AE-DPF"], "keywords": ["dpf", "particulate filter"]},
+    {"component": "alternator",     "name": "Alternator",          "failure_code": "ELC-ALT-OUT",  "std_labor_hours": 1.5, "part_prefixes": ["VS-ALT", "NS-ALT"], "keywords": ["alternator", "not charging"]},
+    {"component": "starter",        "name": "Starter motor",       "failure_code": "ELC-STR-FAIL", "std_labor_hours": 1.5, "part_prefixes": ["VS-STR"], "keywords": ["starter"]},
+    {"component": "air_compressor", "name": "Air compressor",      "failure_code": "AIR-CMP-FAIL", "std_labor_hours": 3.0, "part_prefixes": ["NS-AC"],  "keywords": ["air compressor", "compressor"]},
+    {"component": "brake_chamber",  "name": "Brake chamber",       "failure_code": "BRK-CHM-LEAK", "std_labor_hours": 1.0, "part_prefixes": ["NS-BC"],  "keywords": ["brake chamber"]}
+  ]
+}
