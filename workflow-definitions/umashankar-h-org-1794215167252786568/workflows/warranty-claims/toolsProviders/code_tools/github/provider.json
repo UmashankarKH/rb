@@ -1,0 +1,7 @@
+{
+  "scope": "run",
+  "integrations": [
+    { "connectionConfigId": "github", "actions": ["post", "get"] },
+    { "connectionConfigId": "github-token", "actions": ["get-credentials"] }
+  ]
+}

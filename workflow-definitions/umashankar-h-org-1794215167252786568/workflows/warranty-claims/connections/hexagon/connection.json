@@ -1,0 +1,6 @@
+{
+  "name": "Hexagon work order events",
+  "providerId": "webhook",
+  "actions": [],
+  "subscriptions": [{ "eventTypeId": "received" }]
+}

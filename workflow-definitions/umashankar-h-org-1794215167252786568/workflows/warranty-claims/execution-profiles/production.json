@@ -1,0 +1,37 @@
+{
+  "codeTools": {
+    "default": "execute",
+    "overrides": {}
+  },
+  "connections": {
+    "hexagon": {
+      "connectionId": null,
+      "actions": {
+        "default": "execute",
+        "overrides": {}
+      }
+    },
+    "github": {
+      "connectionId": null,
+      "actions": {
+        "default": "execute",
+        "overrides": {}
+      }
+    },
+    "github-token": {
+      "connectionId": null,
+      "actions": {
+        "default": "execute",
+        "overrides": {}
+      }
+    }
+  },
+  "browserProviders": {
+    "default": "execute",
+    "overrides": {}
+  },
+  "delegations": {
+    "default": "execute",
+    "overrides": {}
+  }
+}

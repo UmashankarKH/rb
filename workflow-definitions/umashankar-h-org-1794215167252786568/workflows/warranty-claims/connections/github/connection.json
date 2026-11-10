@@ -1,0 +1,9 @@
+{
+  "name": "GitHub API",
+  "providerId": "http",
+  "actions": [
+    { "actionId": "post", "enabled": true },
+    { "actionId": "get", "enabled": true }
+  ],
+  "subscriptions": []
+}

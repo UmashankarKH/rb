@@ -1,3 +1,17 @@
 __pycache__/
 *.pyc
 output/
+.runbook/
+.playwright-cli/
+.claude/skills/rb-build/
+.claude/skills/rb-draft/
+.claude/skills/rb-evaluate/
+.claude/skills/rb-interact/
+.claude/skills/rb-investigate/
+.claude/skills/rb-maintain/
+.agents/skills/rb-build/
+.agents/skills/rb-draft/
+.agents/skills/rb-evaluate/
+.agents/skills/rb-interact/
+.agents/skills/rb-investigate/
+.agents/skills/rb-maintain/

@@ -1,0 +1,10 @@
+{
+  "defaultExecutionProfiles": {
+    "simulation": "simulation",
+    "production": "production"
+  },
+  "manualRunDefaults": {
+    "agentConfigId": "main-agent",
+    "initialMessageTemplate": "Work order {{name}} has closed. Run its warranty review."
+  }
+}

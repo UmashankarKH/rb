@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "tenantName": "Umashankar H Org",
+  "environment": {
+    "slug": "umashankar-h-org-1794215167252786568",
+    "apiUrl": "https://api-interview.myrunbook.com",
+    "appUrl": "https://interview.myrunbook.com",
+    "organizationId": "org_3LrbWo9fALwiQJMszxL8Ya5Uvu2"
+  }
+}

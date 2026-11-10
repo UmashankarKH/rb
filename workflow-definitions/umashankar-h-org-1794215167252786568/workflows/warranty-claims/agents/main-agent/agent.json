@@ -1,0 +1,9 @@
+{
+  "type": "text",
+  "name": "Warranty Claims Agent",
+  "model": "anthropic:claude-sonnet-4-6",
+  "promptFormat": "task@1",
+  "toolBindings": [
+    { "type": "code_tools", "toolsProviderId": "github", "toolNames": ["run_warranty_agent_on_github"] }
+  ]
+}

@@ -1,4 +1,6 @@
 name: Warranty Claims Agent
+# The event id in the run name lets the caller (the Runbook workflow) find its run.
+run-name: "Warranty agent ${{ github.event.client_payload.wo_id || github.event.inputs.wo_id || 'tests' }} ${{ github.event.client_payload.event_id }}"
 
 on:
   # 1. Webhook trigger: Hexagon (or trigger/fire_github.py) calls the GitHub API

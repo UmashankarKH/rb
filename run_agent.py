@@ -83,7 +83,24 @@ def main() -> int:
     if summary:
         with open(summary, "a", encoding="utf-8") as f:
             f.write(md)
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        # One notice annotation per work order. Callers such as the Runbook workflow read
+        # these through GitHub's check-run annotations API.
+        for r in results:
+            print(f"::notice title=WARRANTY_RESULT::{_annotation(r, args.event_id)}")
     return 0
+
+
+def _annotation(r, event_id: str | None) -> str:
+    payload = json.dumps({
+        "event_id": event_id, "wo_id": r.wo_id, "status": r.status,
+        "component": r.component, "policy_id": r.policy_id,
+        "claim_number": r.claim_number, "claim_value": r.claim_value,
+        "reason": r.reason, "narrative_3c": r.narrative_3c,
+        "needed_approval": r.needed_approval, "needed_tech_info": r.needed_tech_info,
+    }, separators=(",", ":"))
+    # GitHub workflow-command escaping for the message part
+    return payload.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
 
 if __name__ == "__main__":

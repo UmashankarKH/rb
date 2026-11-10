@@ -1,0 +1,6 @@
+{
+  "name": "GitHub token",
+  "providerId": "credentials",
+  "actions": [{ "actionId": "get-credentials", "enabled": true }],
+  "subscriptions": []
+}
