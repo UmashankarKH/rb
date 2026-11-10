@@ -19,9 +19,9 @@
       }
     },
     "github-token": {
-      "connectionId": null,
+      "connectionId": "01a1c2c9-9412-712a-8856-e72a54bcfacc",
       "actions": {
-        "default": "simulated",
+        "default": "execute",
         "overrides": {}
       }
     }

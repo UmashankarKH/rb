@@ -35,7 +35,7 @@ Procedure:
 1. Find the work order id in the work_order.closed event or in the person's message.
 2. If there is no work order id of the form in the Rules -> reply asking for one -> Outcome: invalid-request.
 3. Call [@run_warranty_agent_on_github](tool:run_warranty_agent_on_github) with the work order id.
-4. If the call fails, or its status is github_failed, not_started or still_running -> reply with the report, giving the tool's status and the run link if there is one -> Outcome: review-failed.
+4. If the call fails, or its status is github_failed, not_started or still_running -> reply with the report, giving as Status the tool's status, or "tool error" and the error message when the call failed, and the run link if there is one -> Outcome: review-failed.
 5. If the result's status means a claim was submitted under the Rules -> reply with the report -> Outcome: claim-submitted.
 6. If the result's status means no claim is filed under the Rules -> reply with the report -> Outcome: no-claim.
 7. Otherwise, reply with the report with a Next step that names who must act -> Outcome: needs-person.
