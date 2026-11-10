@@ -49,8 +49,22 @@ export default (async ({ input, ctx }) => {
     actionId: "get-credentials",
     params: {},
   });
-  const token = String(creds.GITHUB_TOKEN ?? "");
-  if (!token) throw new Error("The github-token connection has no GITHUB_TOKEN value. Add it in the Runbook app.");
+  const raw = creds.GITHUB_TOKEN as unknown;
+  // A stored value may arrive as a string or as an object holding it.
+  const token =
+    typeof raw === "string"
+      ? raw.trim()
+      : raw && typeof raw === "object" && typeof (raw as { value?: unknown }).value === "string"
+        ? ((raw as { value: string }).value).trim()
+        : "";
+  if (!token) {
+    // Describe the shape only, never the value.
+    const shape = raw === null ? "null" : Array.isArray(raw) ? "array" : typeof raw;
+    const keys = raw && typeof raw === "object" ? Object.keys(raw as object).join(",") : "";
+    throw new Error(
+      `The github-token connection's GITHUB_TOKEN is empty (type ${shape}${keys ? `, keys ${keys}` : ""}; connection keys: ${Object.keys(creds).join(",")}). Check its value in the Runbook app.`,
+    );
+  }
   const headers = {
     Accept: "application/vnd.github+json",
     Authorization: `Bearer ${token}`,
